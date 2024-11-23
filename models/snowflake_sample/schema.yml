@@ -1,7 +1,11 @@
 version: 2
 
 sources:
-  - name: sample_data
-    schema: TEST_DB
+  - name: RAW_SOURCE
+    database: DB_SNF  
+    schema: TEST_DB  
     tables:
       - name: DATA_SAMPLE
+
+
+

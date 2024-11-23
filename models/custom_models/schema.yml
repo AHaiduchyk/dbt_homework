@@ -1,0 +1,28 @@
+version: 2
+
+models:
+  - name: data_sample_industry_percentages
+    tests:
+      - not_null:
+          column_name: YEAR
+      - not_null:
+          column_name: INDUSTRY_CODE
+
+
+seeds:
+  - name: exclude_data_sample
+    tests:
+      - not_null:
+          column_name: YEAR
+      - not_null:
+          column_name: INDUSTRY_CODE
+
+tests:
+  - name: exclude_data_validation
+    test: |
+      SELECT *
+      FROM {{ ref('data_sample_industry_percentages') }}
+      WHERE (YEAR, INDUSTRY_CODE) IN (
+          SELECT YEAR, INDUSTRY_CODE
+          FROM {{ ref('exclude_data_sample') }}
+      );
